@@ -11,7 +11,7 @@ class Todo
     private $dotenv;
     private $dbh;
 
-    const STATUS = [
+    private const STATUS = [
         '未着手',
         '作業中',
         '完了',
