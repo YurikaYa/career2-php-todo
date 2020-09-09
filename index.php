@@ -1,11 +1,11 @@
 <?php
+
 require_once './todo.php';
 $todo = new Todo();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $todo->post($_POST['title'], $_POST['due_date']);
 }
-
 ?>
 <!DOCTYPE>
 <html lang="ja">
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <h1 class="text-center text-primary py-3">TODO App</h1>
 
         <h2 class="text-muted py-3">TODO作成</h2>
-        <form method="POST" action="/index.php">
+        <form method="POST" action="<?php print($_SERVER['PHP_SELF']) ?>">
             <div class="form-group">
                 <label for="title">タスク名</label>
                 <input type="text" class="form-control" name="title" id="title" placeholder="タスク名" required>
@@ -35,81 +35,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <input type="text" class="form-control" name="due_date" id="due_date" required>
             </div>
             <br><br>
-            <input type="hidden" name="token" value="ff77bf1a4e1365c589568883c665a2f2f7ab48f9">
+            <input type="hidden" name="token" value="<?php echo $_SESSION['token']; ?>">
             <input class="btn btn-primary"  type="submit" name="btn" value="TODOを作成する">
         </form>
-
-        <hr>
-
-        <h2 class="text-muted py-3">やること一覧</h2>
-
-        <form method="POST" action="/index.php">
-            <input type="hidden" name="method" value="DELETE">
-            <button class="btn btn-danger" type="submit">TODOを全削除する</button>
-        </form>
-                <table class="table">
-            <thead>
-            <tr>
-                <th>タイトル</th>
-                <th>状態</th>
-                <th>期限</th>
-                <th>更新</th>
-            </tr>
-            </thead>
-            <tbody>
-                        <tr>
-                <form method="POST" action="/index.php">
-                    <td>ごみだし</td>
-                    <td>2020-07-15</td>
-                    <td class="label">
-                        <label>
-                            <select name="status" class="form-control">
-                                <option value='0' >未着手</option><option value='1' selected>作業中</option><option value='2' >完了</option>                            </select>
-                        </label>
-                    </td>
-                    <td>
-                        <input type="hidden" name="method" value="UPDATE">
-                        <input type="hidden" name="todo_id" value="3">
-                        <button class="btn btn-primary" type="submit">変更</button>
-                    </td>
-                </form>
-            </tr>
-                        <tr>
-                <form method="POST" action="/index.php">
-                    <td>メール送る</td>
-                    <td>2020-07-23</td>
-                    <td class="label">
-                        <label>
-                            <select name="status" class="form-control">
-                                <option value='0' >未着手</option><option value='1' >作業中</option><option value='2' selected>完了</option>                            </select>
-                        </label>
-                    </td>
-                    <td>
-                        <input type="hidden" name="method" value="UPDATE">
-                        <input type="hidden" name="todo_id" value="5">
-                        <button class="btn btn-primary" type="submit">変更</button>
-                    </td>
-                </form>
-            </tr>
-                        <tr>
-                <form method="POST" action="/index.php">
-                    <td>宿題</td>
-                    <td>2020-07-30</td>
-                    <td class="label">
-                        <label>
-                            <select name="status" class="form-control">
-                                <option value='0' selected>未着手</option><option value='1' >作業中</option><option value='2' >完了</option>                            </select>
-                        </label>
-                    </td>
-                    <td>
-                        <input type="hidden" name="method" value="UPDATE">
-                        <input type="hidden" name="todo_id" value="4">
-                        <button class="btn btn-primary" type="submit">変更</button>
-                    </td>
-                </form>
-            </tr>
-                        </tbody>
-        </table>
     </div>
 </div>
 
@@ -127,11 +55,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <script src="https://npmcdn.com/flatpickr/dist/l10n/ja.js"></script>
 </script>
 <script>
-  flatpickr(document.getElementById('due_date'), {
+flatpickr(document.getElementById('due_date'), {
     locale: 'ja',
     dateFormat: "Y/m/d",
     minDate: new Date()
-  });
+});
 </script>
 </body>
 </html>
