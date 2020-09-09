@@ -6,6 +6,10 @@ $todo = new Todo();
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $todo->post($_POST['title'], $_POST['due_date']);
 }
+
+
+        $todo_list = $todo->getList();
+        var_dump($todo_list);
 ?>
 <!DOCTYPE>
 <html lang="ja">
@@ -45,6 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         <?php
         $todo_list = $todo->getList();
+        var_dump($todo_list);
         ?>
         <table class="table">
             <thead>
@@ -56,35 +61,35 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </tr>
             </thead>
             <tbody>
-            <?php
-            foreach ($todo_list as $todo) {
-                ?>
-                <tr>
-                    <form method="POST" action="<?php print($_SERVER['PHP_SELF']) ?>">
-                        <td><?=$todo['title']; ?></td>
-                        <td><?=$todo['due_date']; ?></td>
-                        <td class="label">
-                            <label>
-                                <select name="status" class="form-control">
-                                    <?php
-                                    foreach (Todo::STATUS as $key => $label) {
-                                        $is_selected = $key === $todo["status"] ? "selected": "";
-                                        echo "<option value='$key' $is_selected>$label</option>";
-                                    }
-                                    ?>
-                                </select>
-                            </label>
-                        </td>
-                        <td>
-                            <input type="hidden" name="method" value="UPDATE">
-                            <input type="hidden" name="todo_id" value="<?=$todo["id"]; ?>">
-                            <button class="btn btn-primary" type="submit">変更</button>
-                        </td>
-                    </form>
-                </tr>
-                <?php
-            }
-            ?>
+<!--            --><?php
+//            foreach ($todo_list as $todo) {
+//                ?>
+<!--                <tr>-->
+<!--                    <form method="POST" action="--><?php //print($_SERVER['PHP_SELF']) ?><!--">-->
+<!--                        <td>--><?//=$todo['title']; ?><!--</td>-->
+<!--                        <td>--><?//=$todo['due_date']; ?><!--</td>-->
+<!--                        <td class="label">-->
+<!--                            <label>-->
+<!--                                <select name="status" class="form-control">-->
+<!--                                    --><?php
+//                                    foreach (Todo::STATUS as $key => $label) {
+//                                        $is_selected = $key === $todo["status"] ? "selected": "";
+//                                        echo "<option value='$key' $is_selected>$label</option>";
+//                                    }
+//                                    ?>
+<!--                                </select>-->
+<!--                            </label>-->
+<!--                        </td>-->
+<!--                        <td>-->
+<!--                            <input type="hidden" name="method" value="UPDATE">-->
+<!--                            <input type="hidden" name="todo_id" value="--><?//=$todo["id"]; ?><!--">-->
+<!--                            <button class="btn btn-primary" type="submit">変更</button>-->
+<!--                        </td>-->
+<!--                    </form>-->
+<!--                </tr>-->
+<!--                --><?php
+//            }
+//            ?>
             </tbody>
         </table>
     </div>
