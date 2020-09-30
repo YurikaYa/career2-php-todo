@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <body>
 
 <div class="container">
-    <div class="col-md-8">
+    <div class="col-md-12">
         <h1 class="text-center text-primary py-3">TODO App</h1>
 
         <h2 class="text-muted py-3">TODO作成</h2>
@@ -62,6 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <th>期限</th>
                 <th>状態</th>
                 <th>更新</th>
+                <th>削除</th>
             </tr>
             </thead>
             <tbody>
@@ -88,6 +89,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             <input type="hidden" name="method" value="UPDATE">
                             <input type="hidden" name="todo_id" value="<?=$todo["id"]; ?>">
                             <button class="btn btn-primary" type="submit">変更</button>
+                        </td>
+                        <td>
+                            <input type="hidden" name="method" value="DELETE">
+                            <input type="hidden" name="todo_id" value="<?=$todo["id"]; ?>">
+                            <button class="btn btn-danger" type="submit">削除</button>
                         </td>
                     </form>
                 </tr>
