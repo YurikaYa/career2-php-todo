@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $todo->update($_POST["todo_id"], $_POST['status']);
 
     } else {
-        $todo->post($_POST['title'], $_POST['due_date']);
+        $todo->post($_POST['title'], $_POST['due_date'], $_FILES['image']);
 
     }
 }
@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <label for="due_date">期限</label>
                 <input type="text" class="form-control" name="due_date" id="due_date" required>
             </div>
-<!--            <p>アップロード画像</p>-->
+            <p>アップロード画像</p>
             <input type="file" name="image">
             <br><br>
             <input type="hidden" name="token" value="<?php echo $_SESSION['token']; ?>">

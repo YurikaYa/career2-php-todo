@@ -44,9 +44,19 @@ class Todo
      * タスクを保存する
      * @param string $title
      * @param string $due_date
+     * @param array|null $image_file
      */
-    public function post(string $title, string $due_date)
+    public function post(string $title, string $due_date, array $image_file = null)
     {
+        if (!empty($image_file) && !empty($image_file['name'])) {
+            // ファイル名をユニーク化
+            $image = uniqid(mt_rand(), true);
+            // アップロードされたファイルの拡張子を取得
+            $image .= '.' . substr(strrchr($image_file['name'], '.'), 1);
+            // uploadディレクトリにファイル保存
+//            move_uploaded_file($image_file['tmp_name'], './upload/' . $image);
+            move_uploaded_file($image_file['tmp_name'], './' . $image);
+        }
         $stmt = $this->dbh->prepare("INSERT INTO `todo` (title, due_date) VALUES (:title, :due_date)");
         $stmt->bindParam(':title', $title, PDO::PARAM_STR);
         $stmt->bindParam(':due_date', $due_date, PDO::PARAM_STR);
