@@ -4,14 +4,18 @@ require_once './todo.php';
 $todo = new Todo();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    if (isset($_POST["method"]) && $_POST["method"] === "DELETE_All") {
+    if (isset($_POST["method"]) && $_POST["method"] === "DELETE_ALL") {
         $todo->deleteAll();
+
     } elseif (isset($_POST["method"]) && $_POST["method"] === "DELETE") {
         $todo->delete($_POST["todo_id"]);
+
     } elseif (isset($_POST["method"]) && $_POST["method"] === "UPDATE") {
         $todo->update($_POST["todo_id"], $_POST['status']);
+
     } else {
         $todo->post($_POST['title'], $_POST['due_date']);
+        
     }
 }
 ?>
