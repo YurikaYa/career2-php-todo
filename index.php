@@ -85,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             <?php
                             if (isset($todo['image'])) {
                                 $image = $todo['image'];
-                                echo "<img src='upload/$image'; width='100'/>";
+                                echo "<img src='/upload/$image'; width='100'/>";
                             } else {
                                 echo "---";
                             }
