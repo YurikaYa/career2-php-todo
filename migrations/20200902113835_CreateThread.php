@@ -14,6 +14,7 @@ class AddTodoImage extends Migration
         $container['db']->query($sql);
     }
 
+    ##fhakfh
     /**
      * Undo the migration
      */
